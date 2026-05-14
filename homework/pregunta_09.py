@@ -5,7 +5,6 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
-
 def pregunta_09():
     """
     Retorne un diccionario que contenga la cantidad de registros en que
@@ -24,3 +23,18 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+    count_keys = {}
+    with open("files/input/data.csv", "r") as file:
+        for line in file:
+            column = line.split('\t')
+            elements = column[4].strip().split(',')
+
+            for item in elements:
+                key = item.split(':')[0]
+
+                if key in count_keys:
+                    count_keys[key] += 1
+                else:
+                    count_keys[key] = 1 
+    return dict(sorted(count_keys.items()))
+ 
